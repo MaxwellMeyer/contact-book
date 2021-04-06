@@ -40,8 +40,16 @@ Contact.prototype.fullName = function() {
   return this.firstName + " " + this.lastName;
 }
 
+
+
 // User Interface Logic ---------
 let addressBook = new AddressBook();
+
+function attachContactListeners() {
+  $("ul#contacts").on("click", "li", function() {
+    console.log("The id of this <li> is " + this.id + ".");
+  });
+};
 
 function displayContactDetails(addressBookToDisplay) {
   let contactsList = $("ul#contacts");
@@ -54,6 +62,7 @@ function displayContactDetails(addressBookToDisplay) {
 };
 
 $(document).ready(function() {
+  attachContactListeners();
   $("form#new-contact").submit(function(event) {
     event.preventDefault();
     const inputtedFirstName = $("input#new-first-name").val();

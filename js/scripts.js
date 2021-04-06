@@ -47,9 +47,10 @@ let addressBook = new AddressBook();
 
 function attachContactListeners() {
   $("ul#contacts").on("click", "li", function() {
-    console.log("The id of this <li> is " + this.id + ".");
+    showContact(this.id); 
   });
 };
+
 
 function displayContactDetails(addressBookToDisplay) {
   let contactsList = $("ul#contacts");

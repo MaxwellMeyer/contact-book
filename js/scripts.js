@@ -73,21 +73,11 @@ function displayContactDetails(addressBookToDisplay) {
   let htmlForContactInfo = "";
   Object.keys(addressBookToDisplay.contacts).forEach(function(key) {
     const contact = addressBookToDisplay.findContact(key);
-    htmlForContactInfo += "<li id=" + contact.id + ">" + contact.firstName + " " + contact.lastName + "</li>";
-    htmlForContactInfo += 
+    htmlForContactInfo += "<li class=" + contact.id + ">" + contact.firstName + " " + contact.lastName + "</li>";
+    htmlForContactInfo += "<li class=" + contact.id + ">" + "Email Address: " + contact.email + "</li>";
   });
   contactsList.html(htmlForContactInfo);
 };
-
-// display contact's email address
-// inputs: address book object, contactid
-function displayContactEmail(addressBookObject, contactId){
-  //get contactId information
-  const contact = addressBookObject.findContact(contactId);
-  const contactEmail = contact.email; //need to add this to contact object variables
-  //create html string for display
-  const htmlString = `<p>Email Address: ${contactEmail}</p>`;
-}
 
 $(document).ready(function() {
   attachContactListeners();
@@ -103,7 +93,7 @@ $(document).ready(function() {
     $("input#new-phone-number").val("");
     $("input#new-email").val("");
 
-    let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber);
+    let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, inputtedEmail);
     addressBook.addContact(newContact);
     displayContactDetails(addressBook);
   });

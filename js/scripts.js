@@ -30,10 +30,11 @@ AddressBook.prototype.deleteContact = function(id) {
 }
 
 // Business Logic for Contacts ---------
-function Contact(firstName, lastName, phoneNumber) {
+function Contact(firstName, lastName, phoneNumber, email) {
   this.firstName = firstName;
   this.lastName = lastName;
   this.phoneNumber = phoneNumber;
+  this.email = email;
 }
 
 Contact.prototype.fullName = function() {
@@ -67,16 +68,26 @@ function attachContactListeners() {
   });
 };
 
-
 function displayContactDetails(addressBookToDisplay) {
   let contactsList = $("ul#contacts");
   let htmlForContactInfo = "";
   Object.keys(addressBookToDisplay.contacts).forEach(function(key) {
     const contact = addressBookToDisplay.findContact(key);
     htmlForContactInfo += "<li id=" + contact.id + ">" + contact.firstName + " " + contact.lastName + "</li>";
+    htmlForContactInfo += 
   });
   contactsList.html(htmlForContactInfo);
 };
+
+// display contact's email address
+// inputs: address book object, contactid
+function displayContactEmail(addressBookObject, contactId){
+  //get contactId information
+  const contact = addressBookObject.findContact(contactId);
+  const contactEmail = contact.email; //need to add this to contact object variables
+  //create html string for display
+  const htmlString = `<p>Email Address: ${contactEmail}</p>`;
+}
 
 $(document).ready(function() {
   attachContactListeners();
@@ -85,11 +96,13 @@ $(document).ready(function() {
     const inputtedFirstName = $("input#new-first-name").val();
     const inputtedLastName = $("input#new-last-name").val();
     const inputtedPhoneNumber = $("input#new-phone-number").val();
+    const inputtedEmail = $("input#new-email").val();
 
     $("input#new-first-name").val("");
     $("input#new-last-name").val("");
     $("input#new-phone-number").val("");
-    
+    $("input#new-email").val("");
+
     let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber);
     addressBook.addContact(newContact);
     displayContactDetails(addressBook);

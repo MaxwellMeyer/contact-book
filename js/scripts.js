@@ -84,7 +84,7 @@ function displayContactDetails(addressBookToDisplay) {
     const contactEmail = contact.email;
     const contactAddress = contact.address;
     htmlForContactInfo += "<li class=" + contact.id + ">" + contact.firstName + " " + contact.lastName + "</li>";
-    htmlForContactInfo += "<li class=" + contact.id + ">" + "Email Address: " + contactEmail.email + " (" + contactEmail.category + ")</li>";
+    htmlForContactInfo += "<li class=" + contact.id + ">" + "Email Address: " + contactEmail.address + " (" + contactEmail.category + ")</li>";
     htmlForContactInfo += "<li class=" + contact.id + ">" + "Address: " + contactAddress.address + " (" + contactAddress.category + ")</li>";
   });
   contactsList.html(htmlForContactInfo);
@@ -110,8 +110,8 @@ $(document).ready(function() {
     $("input#new-phone-number").val("");
     $("input#new-email").val("");
     $("input#new-address").val("");
-    $("input#EmailCategory").val("");
-    $("input#AddressCategory").val("");
+    $("input#email-category").val("");
+    $("input#address-category").val("");
 
     let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, emailObject, addressObject);
     addressBook.addContact(newContact);
